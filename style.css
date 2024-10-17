@@ -1,7 +1,15 @@
 .left {
     display: flex;
+    text-align: center;
     background-color: yellow;
-    justify-content: flex-start;
+    justify-content: flex-end;
+    height: 50px;
+    width: 100px;
+    transition: transform 1s;
+}
+/* C'est pas ouf en vrai mais j'ai essayé avec la méthode matrix et ça a juste fait disparaitre le truc */
+.left:hover {
+transform: scaleY(5);
 }
 
 #carre {
@@ -40,17 +48,44 @@
     transform: rotate(0deg);
   }
   to {
-    transform: rotate(360deg);
+    transform: rotate(1080deg);
   }
 }
-.rotating {
-  animation: rotating 2s linear infinite;
+/* Bon honnêtement j'en ai marre de cette balle j'ai utilisé exactement la même technique que pour les carrés et l'animation est pas foutue de se lancer donc je sais pas ce qui se passe mais là ça me gonfle je vais retourner coder des choses qui marchent*/
+#balle {
+	display: flex;
+    width: 30px;
+    height: 30px;
+    background-color: green;
+    border-radius:50%;
+
+    animation-name: bounce;
+    animation-iteration-count: infinite;
 }
 
-#carre div:hover {
-	display: flex;
-    background-color: orange;
-    transform: rotate(1080deg);
+@keyframes bounce {
+  0% {
+        transform: translateY(0px);
+    }
+    40% {
+        transform: translateY(180px);
+    }
+    60% {
+        transform: translateY(80px);
+    }
+    80% {
+        transform: translateY(180px);
+    }
+    90% {
+        transform: translateY(140px);
+    }
+    100% {
+        transform: translateY(180px);
+    }
+}
+
+#loadersection {
+	margin-top: 200px;
 }
 
 .loader {
@@ -63,13 +98,13 @@
     line-height: 90px;
     margin: 20px auto;
 
-    animation-name: shy;
+    animation-name: loading;
     animation-duration: 2s;
 
     animation-iteration-count: infinite;
     animation-direction: alternate;
 }
-/* Pourquoi lle délai n'affecte que le premier child? Aucune idée. Le CSS ce serait vachement bien si ça faisait ce qu'on lui dit en fait*/
+/* Si je met la durée de l'animation à 1 seconde ça synchronise le premier et le troisième disque c'est trop bizarre en vrai*/
 
 
 .loader:nth-child(3) {
@@ -80,7 +115,7 @@
     animation-delay: 2s;
 }
 
-@keyframes shy {
+@keyframes loading {
     from {
         background-color: white;
     }
@@ -88,14 +123,71 @@
         background-color: black;
     }
 }
+
+#sectioncarres {
+	margin-bottom: 480px;
 }
 
-#cuby2 {
-    transition: transform 3s 2s, background-color 3s, color 3s;
+.carres {
+	display: flex;
+	width: 20px;
+    height: 20px;
+    color: black;
+    background-color: red;
+
+    animation-name: fourcolors, rotation, circlearound;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
 }
 
-#cuby2:hover {
-    transform: rotate(90deg) translateY(110px);
-    color: white;
-    background-color: #000;
+.carres:nth-child(3) {
+    animation-delay: 1s;
+}
+.carres:nth-child(4) {
+    animation-delay: 2s;
+}
+.carres:nth-child(5) {
+    animation-delay: 3s;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(1080deg);
+  }
+}
+
+@keyframes circlearound {
+  0% {
+    transform: translateX(0px);
+  }
+  25% {
+    transform: translateX(480px);
+  }
+  50% {
+    transform: translateX(480px), translateY(240px);
+  }
+  75% {
+    transform: translateY(240px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes fourcolors {
+    0% {
+        background-color: red;
+    }
+    33% {
+        background-color: cyan;
+    }
+    66% {
+        background-color: blue;
+    }
+    100% {
+        background-color: magenta;
+    }
 }
